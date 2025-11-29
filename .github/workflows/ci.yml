@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build-debug:
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: ubuntu-latest,   c_compiler: gcc,    cpp_compiler: g++     }
+          - {os: ubuntu-latest,   c_compiler: clang,  cpp_compiler: clang++ }
+          - {os: windows-latest,  c_compiler: cl,     cpp_compiler: cl      }
+
+    uses: ./.github/workflows/build.yml
+    with:
+      os:           ${{ matrix.config.os }}
+      build_type:   Debug
+      c_compiler:   ${{ matrix.config.c_compiler }}
+      cpp_compiler: ${{ matrix.config.cpp_compiler }}
+
+  build-release:
+    needs: build-debug
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: ubuntu-latest,   c_compiler: gcc,    cpp_compiler: g++     }
+          - {os: ubuntu-latest,   c_compiler: clang,  cpp_compiler: clang++ }
+          - {os: windows-latest,  c_compiler: cl,     cpp_compiler: cl      }
+
+    uses: ./.github/workflows/build.yml
+    with:
+      os:           ${{ matrix.config.os }}
+      build_type:   Release
+      c_compiler:   ${{ matrix.config.c_compiler }}
+      cpp_compiler: ${{ matrix.config.cpp_compiler }}

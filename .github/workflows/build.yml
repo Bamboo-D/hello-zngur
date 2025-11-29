@@ -1,0 +1,69 @@
+name: Build Action
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: true
+        type: string
+      build_type:
+        required: true
+        type: string
+      c_compiler:
+        required: true
+        type: string
+      cpp_compiler:
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: ${{ inputs.os }}
+    name: Build (${{ inputs.os }} ${{ inputs.c_compiler }}-${{ inputs.build_type }})
+
+    env:
+      CC: ${{ inputs.c_compiler }}
+      CXX: ${{ inputs.cpp_compiler }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup MSVC Developer Command Prompt
+        if: inputs.os == 'windows-latest' # 仅在 Windows 上配置
+        uses: TheMrMilchmann/setup-msvc-dev@v4
+        with:
+          arch: x64
+
+      - name: Setup rust toolchain
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: stable
+          components: rustfmt
+          cache: true
+          cache-workspaces: "./rust -> target"
+
+      - name: Set reusable strings
+        id: strings
+        shell: bash
+        run: |
+          echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+
+      - name: Cargo Test
+        working-directory: ${{ github.workspace }}/rust
+        run: cargo test ${{ inputs.build_type == 'Release' && '--release' || '' }} --all-targets --all-features  # 根据构建类型选择是否使用 --release
+
+      - name: Configure CMake
+        run: >
+          cmake -B ${{ steps.strings.outputs.build-output-dir }}
+          -DCMAKE_CXX_COMPILER=${{ inputs.cpp_compiler }}
+          -DCMAKE_C_COMPILER=${{ inputs.c_compiler }}
+          -DCMAKE_BUILD_TYPE=${{ inputs.build_type }}
+          -S ${{ github.workspace }}
+
+      - name: Build
+        run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ inputs.build_type }}
+
+      - name: CTest
+        if: inputs.build_type == 'Debug'  # 仅对 Debug 构建运行 CTest 测试
+        working-directory: ${{ steps.strings.outputs.build-output-dir }}
+        run: ctest --build-config ${{ inputs.build_type }}
