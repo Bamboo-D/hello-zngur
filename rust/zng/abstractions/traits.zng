@@ -1,0 +1,11 @@
+type (usize, f32) {
+    #layout(size = 16, align = 8);
+    wellknown_traits(Debug);
+
+    fn index(&self) -> usize use crate::abstractions::MyGetTuple;
+    fn score(&self) -> f32 use crate::abstractions::MyGetTuple;
+}
+
+mod crate::abstractions {
+    fn sample_tuple() -> (usize, f32);
+}

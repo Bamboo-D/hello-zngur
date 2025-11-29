@@ -1,0 +1,63 @@
+import "./base.zng";
+
+mod ::std::vec {
+    type Vec<i32> {
+        #layout(size=24, align=8);
+        wellknown_traits(Debug);
+
+        fn new() -> Vec<i32>;
+        fn push(&mut self, i32);
+        fn into_iter(self) -> IntoIter<i32>;
+    }
+
+    type IntoIter<i32> {
+        #layout(size=32, align=8);
+
+        fn next(&mut self) -> ::std::option::Option<i32>;
+    }
+
+    type Vec<f32> {
+        #layout(size=24, align=8);
+
+        fn new() -> Vec<f32>;
+        fn with_capacity(usize) -> Vec<f32>;
+        fn push(&mut self, f32);
+        fn into_iter(self) -> IntoIter<f32>;
+    }
+
+    type IntoIter<f32> {
+        #layout(size=32, align=8);
+
+        fn next(&mut self) -> ::std::option::Option<f32>;
+    }
+
+    type Vec<Vec<f32>> {
+        #layout(size=24, align=8);
+
+        fn new() -> Vec<Vec<f32>>;
+        fn with_capacity(usize) -> Vec<Vec<f32>>;
+        fn push(&mut self, Vec<f32>);
+        fn into_iter(self) -> IntoIter<Vec<f32>>;
+    }
+
+    type IntoIter<Vec<f32>> {
+        #layout(size=32, align=8);
+
+        fn next(&mut self) -> ::std::option::Option<Vec<f32>>;
+    }
+}
+
+type ::std::option::Option<::std::vec::Vec<f32>>{
+    #layout(size=24, align=8);
+
+    fn is_none(&self) -> bool;
+    fn unwrap(self) -> ::std::vec::Vec<f32>;
+}
+
+mod crate::types {
+    fn sample_vec() -> ::std::vec::Vec<i32>;
+    fn echo_vec(::std::vec::Vec<i32>) -> ::std::vec::Vec<i32>;
+    fn reverse_vec(&mut ::std::vec::Vec<i32>);
+    fn echo_2d_vec(::std::vec::Vec<::std::vec::Vec<f32>>) -> ::std::vec::Vec<::std::vec::Vec<f32>>;
+    fn print_2d_vec(&::std::vec::Vec<::std::vec::Vec<f32>>);
+}

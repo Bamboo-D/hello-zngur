@@ -1,0 +1,22 @@
+type bool {
+    #layout(size = 1, align = 1);
+    wellknown_traits(Copy);
+}
+
+mod ::std::option{
+    type Option<i32>{
+        #layout(size=8, align=4);
+        wellknown_traits(Copy);
+
+        fn is_none(&self) -> bool;
+        fn unwrap(self) -> i32;
+    }
+
+    type Option<f32>{
+        #layout(size=8, align=4);
+        wellknown_traits(Copy);
+
+        fn is_none(&self) -> bool;
+        fn unwrap(self) -> f32;
+    }
+}

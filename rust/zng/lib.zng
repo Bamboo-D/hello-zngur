@@ -1,0 +1,6 @@
+import "./types.zng";
+import "./abstractions.zng";
+
+mod crate {
+    fn hello_rust();
+}
