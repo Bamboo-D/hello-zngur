@@ -7,7 +7,6 @@
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
-		"ghcr.io/devcontainers/features/rust:1": {},
 		"ghcr.io/devcontainers-extra/features/cmake:1": {}
 	},
 
@@ -28,7 +27,7 @@
 				"PKief.material-icon-theme"
 			]
 		}
-	}
+	},
 
 	// Use 'mounts' to make the cargo cache persistent in a Docker Volume.
 	// "mounts": [
@@ -43,7 +42,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "rustc --version",
+	"postCreateCommand": "sudo ln -svf /usr/local/lib/cmake/cmake-4.2.0-rc4-linux-x86_64/bin/{cmake,cpack,ctest} /usr/local/bin/"
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
