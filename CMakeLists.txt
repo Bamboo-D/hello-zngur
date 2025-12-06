@@ -8,6 +8,13 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 enable_testing()
 
+# 如果是 Clang 且至少 C++23，使用 libc++
+if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND CMAKE_CXX_STANDARD GREATER_EQUAL 23)
+    message(STATUS "Configuring Clang with libc++ for C++${CMAKE_CXX_STANDARD}")
+    add_compile_options(-stdlib=libc++)
+    add_link_options(-stdlib=libc++)
+endif()
+
 # 根据 CMake 生成变量设置 cargo 构建命令和目录
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(CARGO_BUILD_CMD cargo build)
