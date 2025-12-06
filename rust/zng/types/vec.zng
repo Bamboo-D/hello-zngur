@@ -58,6 +58,8 @@ mod crate::types {
     fn sample_vec() -> ::std::vec::Vec<i32>;
     fn echo_vec(::std::vec::Vec<i32>) -> ::std::vec::Vec<i32>;
     fn reverse_vec(&mut ::std::vec::Vec<i32>);
+    fn sample_2d_vec() -> ::std::vec::Vec<::std::vec::Vec<f32>>;
     fn echo_2d_vec(::std::vec::Vec<::std::vec::Vec<f32>>) -> ::std::vec::Vec<::std::vec::Vec<f32>>;
+    fn square_2d_vec(&mut ::std::vec::Vec<::std::vec::Vec<f32>>);
     fn print_2d_vec(&::std::vec::Vec<::std::vec::Vec<f32>>);
 }

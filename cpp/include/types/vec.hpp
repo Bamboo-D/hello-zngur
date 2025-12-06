@@ -27,6 +27,50 @@ struct IntoCppTraits<std::vector<int32_t>, rust::std::vec::Vec<int32_t>>
     }
 };
 
+// Vec<float> -> std::vector<float>
+template <>
+struct IntoCppTraits<std::vector<float>, rust::std::vec::Vec<float>>
+{
+    static std::vector<float> convert(rust::std::vec::Vec<float> &&rust_vec) noexcept
+    {
+        std::vector<float> cpp_vec;
+
+        auto iter = rust_vec.into_iter();
+        while (true)
+        {
+            auto opt = iter.next();
+            if (opt.is_none())
+                break;
+            cpp_vec.push_back(opt.unwrap());
+        }
+
+        return cpp_vec;
+    }
+};
+
+// Vec<Vec<float>> -> std::vector<std::vector<float>>
+template <>
+struct IntoCppTraits<std::vector<std::vector<float>>, rust::std::vec::Vec<rust::std::vec::Vec<float>>>
+{
+    static std::vector<std::vector<float>> convert(rust::std::vec::Vec<rust::std::vec::Vec<float>> &&rust_2d_vec) noexcept
+    {
+        std::vector<std::vector<float>> cpp_2d_vec;
+
+        auto outer_iter = rust_2d_vec.into_iter();
+        while (true)
+        {
+            auto opt_outer = outer_iter.next();
+            if (opt_outer.is_none())
+                break;
+            auto rust_inner_vec = opt_outer.unwrap();
+            auto cpp_inner_vec = intoCpp<std::vector<float>>(std::move(rust_inner_vec));
+            cpp_2d_vec.push_back(std::move(cpp_inner_vec));
+        }
+
+        return cpp_2d_vec;
+    }
+};
+
 /* intoRust */
 
 // std::vector<int32_t> -> Vec<int32_t>
