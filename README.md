@@ -12,8 +12,8 @@ Demonstrates how to call Rust from C++ (using Rust as a library) with a CMake bu
 
 - [x] Vec (`Vec<i32>`<->`std::vector<int32_t>`)
 - [x] Vec Vec (`Vec<Vec<f32>>`<->`std::vector<std::vector<float>>`)
-- [ ] str
-- [ ] String
+- [x] &str (`&str`<->`std::string_view`)
+- [x] String (`String`<->`&str`<->`std::string_view`<->`std::string`)
 - [ ] Result
 
 ### Abstractions

@@ -1,1 +1,2 @@
 import "./types/vec.zng";
+import "./types/string.zng";
