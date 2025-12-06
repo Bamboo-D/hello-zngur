@@ -1,0 +1,21 @@
+type ::std::string::String {
+    #layout(size = 24, align = 8);
+
+    fn as_str(&self) -> &str;
+    fn len(&self) -> usize;
+}
+
+type str {
+    wellknown_traits(?Sized);
+
+    fn to_owned(&self) -> ::std::string::String;
+    fn as_ptr(&self) -> *const u8;
+    fn len(&self) -> usize;
+}
+
+mod crate::types {
+    fn sample_string() -> ::std::string::String;
+    fn echo_string(::std::string::String) -> ::std::string::String;
+    fn reverse_string(&mut ::std::string::String);
+    fn reverse_str(&str) -> ::std::string::String;
+}

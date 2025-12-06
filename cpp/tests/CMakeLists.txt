@@ -12,4 +12,5 @@ function(add_cpp_test cpp_path)
 endfunction()
 
 add_cpp_test("types/vec.cpp")
+add_cpp_test("types/string.cpp")
 add_cpp_test("abstractions/traits.cpp")
