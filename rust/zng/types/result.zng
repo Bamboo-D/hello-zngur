@@ -1,0 +1,12 @@
+type ::std::result::Result<::std::string::String, i32> {
+    #heap_allocated;
+
+    fn is_ok(&self) -> bool;
+    fn is_err(&self) -> bool;
+    fn unwrap(self) -> ::std::string::String;
+    fn unwrap_err(self) -> i32;
+}
+
+mod crate::types {
+    fn is_positive_result(i32) -> ::std::result::Result<::std::string::String, i32>;
+}
