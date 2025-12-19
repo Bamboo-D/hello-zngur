@@ -6,6 +6,7 @@ set(RS_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/types/result.rs
     ${CMAKE_CURRENT_SOURCE_DIR}/src/abstractions.rs
     ${CMAKE_CURRENT_SOURCE_DIR}/src/abstractions/traits.rs
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/abstractions/crates.rs
 )
 
 set(ZNG_SOURCES
@@ -17,6 +18,7 @@ set(ZNG_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/zng/types/result.zng
     ${CMAKE_CURRENT_SOURCE_DIR}/zng/abstractions.zng
     ${CMAKE_CURRENT_SOURCE_DIR}/zng/abstractions/traits.zng
+    ${CMAKE_CURRENT_SOURCE_DIR}/zng/abstractions/crates.zng
 )
 
 add_custom_command(
