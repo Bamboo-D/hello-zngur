@@ -1,5 +1,5 @@
 type ::std::result::Result<::std::string::String, i32> {
-    #heap_allocated;
+    #layout(size=24, align=8);
 
     fn is_ok(&self) -> bool;
     fn is_err(&self) -> bool;

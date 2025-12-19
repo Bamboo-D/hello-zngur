@@ -1,0 +1,31 @@
+mod serde_json {
+    // Same as handling in std.
+
+    type Value {
+        #layout(size=32, align=8);
+        wellknown_traits(Debug);
+    }
+
+    fn from_str(&str) -> ::std::result::Result<Value, Error>;
+    fn to_string(&Value) -> ::std::result::Result<::std::string::String, Error>;
+}
+
+type ::std::result::Result<::serde_json::Value, ::serde_json::Error> {
+    #layout(size = 32, align = 8);
+
+    fn is_ok(&self) -> bool;
+    fn is_err(&self) -> bool;
+    fn unwrap(self) -> ::serde_json::Value;
+}
+
+type ::std::result::Result<::std::string::String, ::serde_json::Error> {
+    #layout(size = 24, align = 8);
+
+    fn is_ok(&self) -> bool;
+    fn is_err(&self) -> bool;
+    fn unwrap(self) -> ::std::string::String;
+}
+
+mod crate::abstractions {
+    fn remove_key_from_json(&mut ::serde_json::Value, &str);
+}
