@@ -18,8 +18,8 @@ Demonstrates how to call Rust from C++ (using Rust as a library) with a CMake bu
 
 ### Abstractions
 
-- [x] traits (+ tuple)
-- [ ] external crates
+- [x] impl traits (+ tuple)
+- [x] use crates (serde_json)
 
 ### Examples
 
