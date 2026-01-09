@@ -36,7 +36,7 @@ struct IntoCppTraits<std::string, rust::std::string::String>
 template <>
 struct IntoRustTraits<rust::Ref<rust::Str>, std::string_view>
 {
-    static rust::Ref<rust::Str> convert(const std::string_view &cpp_sv) noexcept
+    static rust::Ref<rust::Str> convert(const std::string_view cpp_sv) noexcept // string_view is lightweight and designed for cheap copying
     {
         return operator""_rs(cpp_sv.data(), cpp_sv.size());
     }
