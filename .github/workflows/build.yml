@@ -26,7 +26,7 @@ jobs:
       CXX: ${{ inputs.cpp_compiler }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Setup MSVC Developer Command Prompt
         if: inputs.os == 'windows-latest' # 仅在 Windows 上配置
