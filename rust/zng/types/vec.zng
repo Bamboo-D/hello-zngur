@@ -1,4 +1,4 @@
-import "./base.zng";
+merge "./base.zng";
 
 mod ::std::vec {
     type Vec<i32> {

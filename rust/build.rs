@@ -2,8 +2,10 @@ use zngur::Zngur;
 
 fn main() {
     let _build = Zngur::from_zng_file("zng/lib.zng")
+        .with_crate_name("rust_lib")
         .with_rs_file("src/zgenerated.rs")
         .with_h_file("zgenerated.h")
+        .with_zng_header("zngur.h")
         .generate();
 
     println!("cargo::rerun-if-changed=src/lib.rs");

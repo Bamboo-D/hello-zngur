@@ -2,7 +2,7 @@
 
 #include "zgenerated.h"
 
-using namespace rust::crate;
+using namespace rust::rust_lib;
 
 int main()
 {

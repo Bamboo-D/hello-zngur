@@ -1,2 +1,2 @@
-import "./abstractions/traits.zng";
-import "./abstractions/crates.zng";
+merge "./abstractions/traits.zng";
+merge "./abstractions/crates.zng";
