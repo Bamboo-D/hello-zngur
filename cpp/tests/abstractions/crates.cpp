@@ -3,7 +3,7 @@
 #include <cassert>
 
 using namespace rust::serde_json;
-using namespace rust::crate::abstractions;
+using namespace rust::rust_lib::abstractions;
 
 int main()
 {

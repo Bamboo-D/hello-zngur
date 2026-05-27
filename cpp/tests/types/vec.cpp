@@ -2,7 +2,7 @@
 
 #include <cassert>
 
-using namespace rust::crate::types;
+using namespace rust::rust_lib::types;
 
 template <typename T>
 using Vec = rust::std::vec::Vec<T>;

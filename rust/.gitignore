@@ -1,4 +1,5 @@
 target/
 
+zngur.h
 zgenerated.h
 zgenerated.rs

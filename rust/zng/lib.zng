@@ -1,5 +1,5 @@
-import "./types.zng";
-import "./abstractions.zng";
+merge "./types.zng";
+merge "./abstractions.zng";
 
 mod crate {
     fn hello_rust();
